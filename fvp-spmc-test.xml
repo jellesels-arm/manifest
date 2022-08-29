@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+        <include name="fvp.xml" />
+
+        <remote name="arm-gitlab" fetch="https://git.gitlab.arm.com" />
+        <remote name="github_js" fetch="https://github.com/jellesels-arm" />
+
+
+        <!-- OP-TEE gits -->
+        <!-- Need to remove and re-add to replace Makefile symlink -->
+        <remove-project path="build"                    name="OP-TEE/build.git" />
+        <project        path="build"   revision="SPMC_TEST" remote="github_js"      name="build.git">
+                <linkfile src="fvp-psa-sp.mk" dest="build/Makefile" />
+        </project>
+
+        <remove-project  path="optee_test"           name="OP-TEE/optee_test.git" />
+        <project path="optee_test"    revision="SPMC_TEST" remote="github_js"         name="optee_test.git" />
+
+        <remove-project  path="optee_os"           name="OP-TEE/optee_os.git" />
+        <project path="optee_os"    revision="SPMC_TEST" remote="github_js"         name="optee_os.git" />
+
+        <!-- linaro-swg gits -->
+        <!-- Replace Linux with mainline version -->
+        <remove-project path="linux"                    name="linaro-swg/linux.git" />
+        <project        path="linux"                    name="torvalds/linux.git"                       revision="refs/tags/v5.16" clone-depth="1" />
+
+        <!-- Misc gits -->
+        <!-- The fTPM is not used in this config -->
+        <remove-project path="ms-tpm-20-ref"            name="microsoft/ms-tpm-20-ref" />
+        <!-- Add Trusted Services Linux drivers -->
+        <project        path="linux-arm-ffa-user"       name="linux-arm/linux-trusted-services.git"     revision="refs/tags/v4.0.0" clone-depth="1" remote="arm-gitlab" />
+        <project        path="linux-arm-ffa-tee"        name="linux-arm/linux-trusted-services.git"     revision="refs/tags/tee-v1" clone-depth="1" remote="arm-gitlab" />
+        <!-- Add Trusted Services project -->
+        <project        path="trusted-services"         name="TS/trusted-services.git"                  revision="refs/changes/59/10159/13" remote="tfo" />
+</manifest>
