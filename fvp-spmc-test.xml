@@ -3,15 +3,18 @@
         <include name="fvp.xml" />
 
         <remote name="arm-gitlab" fetch="https://git.gitlab.arm.com" />
+        <remote name="github_js" fetch="https://github.com/jellesels-arm" />
 
 
         <!-- OP-TEE gits -->
         <!-- Need to remove and re-add to replace Makefile symlink -->
         <remove-project path="build"                    name="OP-TEE/build.git" />
-        <project path="build"                name="OP-TEE/build.git">
-
-        <linkfile src="fvp-psa-sp.mk" dest="build/Makefile" />
+        <project        path="build"   revision="multiple_uuid" remote="github_js"      name="build.git">
+                <linkfile src="fvp-psa-sp.mk" dest="build/Makefile" />
         </project>
+
+        <remove-project  path="optee_os"           name="OP-TEE/optee_os.git" />
+        <project path="optee_os"    revision="multiple_uuid" remote="github_js"     name="optee_os.git" />
 
         <!-- linaro-swg gits -->
         <!-- Replace Linux with mainline version -->
@@ -25,5 +28,5 @@
         <project        path="linux-arm-ffa-user"       name="linux-arm/linux-trusted-services.git"     revision="refs/tags/v4.0.0" clone-depth="1" remote="arm-gitlab" />
         <project        path="linux-arm-ffa-tee"        name="linux-arm/linux-trusted-services.git"     revision="refs/tags/tee-v1" clone-depth="1" remote="arm-gitlab" />
         <!-- Add Trusted Services project -->
-        <project        path="trusted-services"         name="TS/trusted-services.git"                  revision="refs/changes/59/10159/13" remote="tfo" />
+        <project        path="trusted-services"         name="TS/trusted-services.git"                  revision="refs/changes/43/18443/1" remote="tfo" />
 </manifest>
